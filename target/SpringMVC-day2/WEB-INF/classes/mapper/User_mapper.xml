@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.Dao.UserDao">
+    <!--查询单个用户名和密码-->
+    <select id="SelectOne" resultType="User">
+        select * from user where username=#{username} and password=#{password}
+    </select>
+    <!--展示所有部门-->
+    <select id="queryAll" resultType="Department">
+        select * from department
+    </select>
+    <!--添加部门-->
+    <insert id="UserInsert">
+        insert into department (depart_id,depart_name,depart_number) values (#{depart_id},#{depart_name},#{depart_number});
+    </insert>
+    <!--修改-->
+    <update id="UserUpdate">
+        update department set depart_name=#{depart_name},depart_number=#{depart_number} where depart_id=#{depart_id};
+    </update>
+    <!--根据id查询一个部门-->
+    <select id="selectOne" resultType="Department">
+        select * from department where depart_id=#{depart_id};
+    </select>
+</mapper>

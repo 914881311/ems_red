@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.baizhi.Dao.PopleDao">
+    <resultMap id="Map" type="Pople">
+        <id column="pid" property="id"></id>
+        <result column="cover" property="cover"></result>
+        <result column="name" property="name"></result>
+        <result column="age" property="age"></result>
+        <result column="salary" property="salary"></result>
+        <result column="department_id" property="department_id"></result>
+        <association property="department" javaType="Department">
+            <id column="did" property="depart_id"></id>
+            <result column="depart_name" property="depart_name"></result>
+            <result column="depart_number" property="depart_number"></result>
+        </association>
+    </resultMap>
+    <!--展示所有员工-->
+    <select id="popleSelectAllList" resultMap="Map">
+        select d.depart_id did,d.depart_name,d.depart_number,p.id pid,p.cover,p.name,p.salary,p.age,p.department_id
+	from department d left join pople p on p.department_id=d.depart_id where p.department_id=#{department_id}
+    </select>
+
+
+    <!--展示所有部门-->
+    <select id="popleInsterShowAll" resultType="Department">
+        select * from department
+    </select>
+    <!--添加员工-->
+    <insert id="popleInster">
+        insert into pople (cover,name,salary,age,department_id) values (#{cover},#{name},#{salary},#{age},#{department_id})
+    </insert>
+    <!--删除员工-->
+    <delete id="deleteById">
+        delete from pople where id=#{id}
+    </delete>
+    <!--修改-->
+    <update id="updateByPople">
+        update pople set cover=#{cover},name=#{name},salary=#{salary},age=#{age},department_id=#{department_id} where id=#{id};
+    </update>
+    <!--根据员工id查询单个员工-->
+    <select id="selectOneId" resultType="Pople">
+        select * from Pople where id=#{id}
+    </select>
+</mapper>

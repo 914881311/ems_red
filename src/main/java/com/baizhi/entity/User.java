@@ -1,7 +1,7 @@
 package com.baizhi.entity;
 
 import org.springframework.stereotype.Component;
-
+//这是用户
 @Component //创建对象默认构建id
 public class User {
     private Integer id;
